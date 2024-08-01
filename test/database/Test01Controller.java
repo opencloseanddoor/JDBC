@@ -26,19 +26,17 @@ public class Test01Controller extends HttpServlet
 		//접속
 		mysqlService.connect();
 		
-		ResultSet resultSet = mysqlService.select("SELECT * FROM `real_estate` ORDER BY id DESC");
+		ResultSet resultSet = mysqlService.select("SELECT * FROM `real_estate` ORDER BY id DESC LIMIT 10");
 		
 		try 
 		{
-			int count = 0;
-			while(resultSet.next() && count < 10)
+			while(resultSet.next())
 			{
 				String address = resultSet.getString("address");
 				int area = resultSet.getInt("area");
 				String type = resultSet.getString("type");
 				
 				out.println("매물주소 : " + address + " 가격 : " + area + " 타입 : " + type);
-				count++;
 			}
 		} 
 		catch (SQLException e)
